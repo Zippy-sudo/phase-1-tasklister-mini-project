@@ -1,150 +1,76 @@
-# Challenge: TaskLister Mini-Project
 
-## Learning Goals
+# TaskLister
 
-- Build a functioning to-do list application
-- Suppress a default action with `event.preventDefault()`
+TaskLister is a basic website that enables you to plan your day.
 
-## Introduction
+## Installation
+#### Prerequisites
 
-In this lab, you'll be creating a simple to-do list application that uses
-JavaScript to manipulate the DOM.
+Make sure you are on a computer running the Ubuntu Operating System and that you have the Google-Chrome Browser installed.
 
-Check out the [working demo][example]!
+### Step 1
+Make sure you have git in your packages.
+In your terminal type:
+```bash
+whereis git
+```
+Your terminal should display something like this if git is installed:
+```bash
+git: /usr/bin/git /usr/share/man/man1/git.1.gz
+```
+If it shows this instead
+```bash
+git:
+``` 
+please visit [Git Page] (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) for a comprehensive guide on how to install git.
 
-## Lab: Build a Functioning To-Do List Application
+### Step 2
+Use git to clone this repository into a folder of your choice
 
-Instead of relying on tests, this lab is _deliverable driven_. You will be
-responsible for ensuring that your solution works as intended by testing the
-behavior in the browser.
-
-1. Fork and clone this repository
-2. Open `index.html` in Chrome
-3. Put your JavaScript knowledge to the test and work your way through the
-   deliverables
-
-Once you're done, be sure to commit and push your code up to GitHub, then submit
-the assignment using CodeGrade. Even though this lab does not have tests, it
-must still be submitted through CodeGrade in order to be marked as complete in
-Canvas.
-
-### Structuring Your Code
-
-You've been provided with a basic HTML file, as well as an `index.js` file where
-you can implement your solution. Note that the `index.js` file is contained
-within a `src` folder — this is a common pattern that you will see in many labs
-moving forward. If you take a look at the `index.html` file, you'll see that the
-`script` tag that loads the code file includes the `src` directory in its path:
-
-```html
-<script src="./src/index.js"></script>
+In your terminal type:
+```bash
+git clone pathTo/FolderofYour/Choice
 ```
 
-### Deliverables
+be sure to replace _pathTo/FolderofYour/Choice_ with **the** path to the folder of your choice.
 
-- As a user, I should be able to type a task into the input field.
-- As a user, I should be able to click some form of a submit button.
-- As a user, I expect to see the task string that I provided appear in the DOM
-  after the submit button has been activated.
-
-**Note:** [While the example][example] shows one possible working implementation
-of the TaskLister app, yours can (and is encouraged to!) look however you like!
-
-### HTML Forms
-
-For this lab, we are going to be using the [HTML `<form>` element][form] to
-capture the tasks the user enters. HTML forms can be quite complex and
-sophisticated but, at their most basic, consist of opening and closing `<form>`
-tags that enclose one or more `<input>` elements where users can enter
-information, and a way to submit the form. There are many types of [input
-fields][] to choose from; we use the `type` attribute to specify the one we
-want. For this lab, we are using two: a text field (`type="text"`) and a submit
-button (`type="submit"`).
-
-If you look in the `index.html` file, you will see the following:
-
-```html
-<form id="create-task-form" action="#" method="POST">
-  <label for="new-task-description">Task description:</label>
-  <input
-    type="text"
-    id="new-task-description"
-    name="new-task-description"
-    placeholder="description"
-  />
-  <input type="submit" value="Create New Task" />
-</form>
+## Using the TaskLister
+Make sure that you are in the folder into which you cloned this repository.
+Your terminal should look something like this:
+```bash
+User:~/pathTo/FolderofYour/Choice
 ```
-
-Now take a look at the page in your browser. The rendered form looks like this:
-
-![TaskLister input form](https://curriculum-content.s3.amazonaws.com/phase-1/javascript-events/task_lister.png)
-
-You can see each of the components that are in our form's HTML:
-
-1. the label for our input field ("Task description:")
-2. the input box, with the placeholder content "description", and
-3. the button that's created by the `submit` input tag
-
-Let's take a closer look at the opening `<form>` tag. You'll see it includes an
-(optional) `id` attribute and two other attributes:
-
-```html
-<form id="create-task-form" action="#" method="POST"></form>
+type:
+```bash
+google-chrome index.html
 ```
+A new tab should open on your browser displaying:
+![Screenshot of loaded Tasklister Page](/src/screenshot/Page.png)
 
-Because HTML forms were designed to be handled by backend programming languages
-such as PHP, the `action` attribute would normally contain a path to the backend
-code that processes the data captured from the user. Because we will be handling
-the form using JavaScript, we don't need to provide a path. By convention, we
-set that attribute to `"#"`.
+Fill in the required fields and select the priority from the dropdown:
+![Screenshot of process of creating a task](/src/screenshot/Page_demo1.png)
 
-The `method` attribute specifies the _type_ of action we're executing when the
-form is submitted. The `method` attribute's value (in this case, "POST") is an
-_HTTP Verb_. (Although it is not required, you will often see HTTP verbs in all
-caps.) We will learn more about HTTP Verbs in the next section. For now, just
-know that the `POST` method is used when we want to capture the data submitted
-by our form and use it in some way.
+then click the **Create New Task** button.
 
-By default, the HTML `<form>` element submits the form and redirects the browser
-to a new url when the `<submit>` button is clicked. This default behavior makes
-sense when form submission is being handled by a back-end programming language.
-However, this _is not_ the experience we want to build in this lab. We instead
-want to handle the submission of the form using JavaScript and update the DOM
-without reloading the page. Therefore, we need to prevent that event from
-performing its default behavior.
+Your Tasklister should display something like this:
+![Screenshot of created tasks](/src/screenshot/Page_demo2.png)
 
-### Suppress a Default Action with `Event.preventDefault()`
+**Green** Is for the least priority task/s.
 
-The deliverables for this lab require you to use JavaScript to handle the
-clicking of the submit button. To do this, you'll need to listen for a `submit`
-event on the `<form>` element. In order to _prevent_ the _default_ behavior of
-the `submit` event, when our event listener "sees" the event, it needs to invoke
-the `preventDefault()` method on it.
+**Gold** Is for the medium priority task/s.
 
-Take a look at the [MDN Documentation on `Event.preventDefault()`][mdn-pd].
-You'll see how JavaScript is used to prevent a form element (checkbox) from
-doing its _default_ behavior (appearing checked upon click). You'll want to
-prevent `submit` from doing its default behavior in a similar fashion.
+**Red** Is for the highest priority task/s.
 
-### Stretch Deliverables
+To delete a task simply click on the x button beside it.
 
-Once you've got the required deliverables working, you may want to try to
-implement one or more of the following:
+_Before_
+![Deleting a task](/src/screenshot/Page_demo2.png)
 
-- A delete function that will remove tasks from your list
-- A priority value selected from a [dropdown][] that is used to determine the
-  color of the text in the list (e.g. red for high priority, yellow for medium,
-  green for low)
-  - As an additional challenge, implement a sorting functionality that displays
-    the tasks in ascending or descending order based on priority
-- An additional input field (e.g. user, duration, date due)
-- Ability to edit tasks
-- Something of your choice! The main objective is to add a feature that allows
-  the user's input to affect the DOM
+_After_
+![Deleting a task](/src/screenshot/Page_demo3.png)
 
-[example]: https://learn-co-curriculum.github.io/js-task-lister-lite/
-[mdn-pd]: https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
-[form]: https://developer.mozilla.org/en-US/docs/Learn/Forms/Your_first_form
-[input fields]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input
-[dropdown]: https://www.w3docs.com/learn-html/html-select-tag.html
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
